@@ -1,9 +1,10 @@
 {
   "name": "svelty-gas-addon-template",
   "version": "1.0.0",
+  "repository": "https://github.com/classroomtechtools/svelty-gas-addon-template",
   "license": {
     "type": "MIT",
-    "url": "https://opensource.org/licenses/MIT"
+    "url": "https://spdx.org/licenses/MIT.html"
   },
   "author": "Adam Morris <classroomtechtools.ctt@gmail.com> (http://classroomtechtools.com/)",
   "scripts": {
@@ -13,8 +14,9 @@
 
     "deploy": "run-p postprocess clasp:push",
 
-    "postprocess": "run-p build static generate:* stage",
+    "postprocess": "run-s build static generate:* stage",
     "static": "cp ./static/* ./staging/",
+    "generate": "run-p generate:*",
     "generate:remote": "cp ./remote/* ./postprocess",
     "generate:global": "echo '<style>' > ./staging/globalcss.ejs && cat ./public/global.css >> ./staging/globalcss.ejs && echo '</style>' >> ./staging/globalcss.ejs",
     "generate:css": "echo '<style>' > ./staging/bundlecss.ejs && cat ./public/build/bundle.css >> ./staging/bundlecss.ejs && echo '</style>' >> ./staging/bundlecss.ejs",
@@ -22,11 +24,11 @@
 
     "stage": "cd ./staging && ejs-cli index.ejs --out ../postprocess/",
 
-    "clasp:create": "clasp create",
+    "clasp:create": "clasp create --rootDir ./postprocess",
     "clasp:login": "clasp login",
     "clasp:logout": "clasp logout",
     "clasp:logs": "clasp logs",
-    "clasp:push": "cd ./postprocess && clasp push"
+    "clasp:push": "clasp push"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^12.0.0",
