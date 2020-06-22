@@ -28,9 +28,10 @@ export const runner = (serverSideFunctions={}) => {
             if (hasProp) return hasProp;
 
             // otherwise assume that this is a server-side function
+            // not yet defined in the package (for local dev)
             // and we'll just call the successHandler after a delay to simulate
-            return function (value) {
-                setTimeout(() => this._state.successHandler(value, this._state.userObj), 2000);
+            return (value) => {
+                setTimeout(() => target._state.successHandler(value, target._state.userObj), 2000);
             };
         }
     }
