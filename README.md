@@ -1,7 +1,3 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
-
----
-
 # Sveltey Gas Addon Template
 
 This is a project template for a google editor add-on (the kind with sidebars), written from as a [Svelte](https://svelte.dev) app. Written by Adam Morris [email](mailto:classroomtechtools.ctt@gmail.com) [homepage](http://classroomtechtools.com/)
