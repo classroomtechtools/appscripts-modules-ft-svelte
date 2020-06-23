@@ -1,15 +1,36 @@
-# Sveltey Gas Addon Template
+# Sidebar Add-on Builder, with AppsScripts & Svelte
 
-This is a project template for a google editor add-on (the kind with sidebars), written as a [Svelte](https://svelte.dev) app. Written by Adam Morris [email](mailto:classroomtechtools.ctt@gmail.com) [homepage](http://classroomtechtools.com/)
+This project allows other developers to build a [Google Editor Add-on](https://developers.google.com/gsuite/add-ons/editors/) with a modern "reactive" technology: [Svelte](https://svelte.dev).
 
-### Why
+## Intro
 
-The author believes that this template has numerous advantages in writing editor add-ons over other solutions:
+AppsScript's Editor Add-ons (which we'll call "Sidebar Add-ons" here) are a way for developers to make custom sidebars which accompanies the user's Google Docs, Spreadsheets, Forms, and Slides experience.
 
-* Beginner friendly: In some ways learning sveltejs is closer to regular programming than web development with jQuery, Angular, Reactjs, or Vuejs.
-* Rapid and immediate results
-* Some advanced things like two-way bindings and css transitions are a cinch
-* The software architecture allows for easy local development
+There are a variety of options to the developer to help with building the front-end user interface, among them jQuery, Reactjs, and Vuejs. The latter two are full-featured development environments that can build full-scale web applications, and in turn, a more practically-oriented Sidebar Add-on. In particular, these reactive technologies have tools and features that helps make web applications built with it respond automatically to user interfactions (i.e. they are "reactive").
+
+Svelte also has those capabilities too, but its implementation has an approach which gives it some compelling advantages particularly suited for **reusing and sharing code** used to make a Google Editor add-on:
+
+* The code is highly organized in reusable components
+* Each component's CSS and business logic is kept all in one file
+* These components can talk to each other in a simple, straight-forward way that does not require learning difficult techniques
+* Those components can published, shared, and reused easily
+
+There are additional advantages having to do with **ease in making them**:
+
+* You don't need to know too much about the DOM or Browser APIs
+* You don't need to learn or implement complicated CSS rules
+* It is closer to programming like an AppsScripts project
+* Svelte itself has an online REPL which gives a [full tutorial](https://svelte.dev/repl/hello-world?version=3) of its features
+
+One more final point:
+
+* It scales "up", i.e. …
+* If you can make a sidebar add-on with this tech, you can apply that directly to building a full-scale web application
+ 
+## Author & License
+
+Written by Adam Morris [email](mailto:classroomtechtools.ctt@gmail.com) [homepage](http://classroomtechtools.com/). Released as Open Source, MIT.
+
 
 ## Quickstart
 
