@@ -10,21 +10,21 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public",
+    "start": "sirv build/svelte",
 
     "deploy": "run-p postprocess clasp:push",
 
     "postprocess": "run-s build static generate:* stage",
-    "static": "cp ./static/* ./staging/",
+    "static": "cp ./src/static/* ./build/staging/",
     "generate": "run-p generate:*",
-    "generate:remote": "cp ./remote/* ./postprocess",
-    "generate:global": "echo '<style>' > ./staging/globalcss.ejs && cat ./public/global.css >> ./staging/globalcss.ejs && echo '</style>' >> ./staging/globalcss.ejs",
-    "generate:css": "echo '<style>' > ./staging/bundlecss.ejs && cat ./public/build/bundle.css >> ./staging/bundlecss.ejs && echo '</style>' >> ./staging/bundlecss.ejs",
-    "generate:js": "echo '<script>' > ./staging/bundlejs.ejs && cat ./public/build/bundle.js >> ./staging/bundlejs.ejs && echo '</script>' >> ./staging/bundlejs.ejs",
+    "generate:remote": "cp ./src/server/* ./project",
+    "generate:global": "echo '<style>' > ./build/staging/globalcss.ejs && cat ./build/svelte/global.css >> ./build/staging/globalcss.ejs && echo '</style>' >> ./build/staging/globalcss.ejs",
+    "generate:css": "echo '<style>' > ./build/staging/bundlecss.ejs && cat ./build/svelte/bundle.css >> ./build/staging/bundlecss.ejs && echo '</style>' >> ./build/staging/bundlecss.ejs",
+    "generate:js": "echo '<script>' > ./build/staging/bundlejs.ejs && cat ./build/svelte/bundle.js >> ./build/staging/bundlejs.ejs && echo '</script>' >> ./build/staging/bundlejs.ejs",
 
-    "stage": "cd ./staging && ejs-cli index.ejs --out ../postprocess/",
+    "stage": "cd ./build/staging && ejs-cli index.ejs --out ../project/",
 
-    "clasp:create": "clasp create --rootDir ./postprocess",
+    "clasp:create": "clasp create --rootDir ./project",
     "clasp:login": "clasp login",
     "clasp:logout": "clasp logout",
     "clasp:logs": "clasp logs",

@@ -43,7 +43,6 @@
 <div class:main={!production}>
 <h1 id="title">{title}</h1>
 
-
 {#each phrases as phrase, index}
 <p>
     <Component language={phrase.language} template={phrase.template}
