@@ -1,3 +1,5 @@
 /node_modules/
 /public/build/
 .DS_Store
+creds.json
+.clasp*
