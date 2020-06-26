@@ -3,16 +3,46 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import multi from '@rollup/plugin-multi-entry';
+import hypothetical from 'rollup-plugin-hypothetical';
+
 
 const production = !process.env.ROLLUP_WATCH;
 
-export default {
-	input: 'src/browser/main.js',
+export default [{
+	input: 'src/bundles/client/*.js',
+	treeshake: true,
+	output: {
+		format: 'iife',
+		file: './build/staging/clientBundle.ejs',
+		banner: '<!-- Bundle from src/bundles/client/ -->\n<script type="application/javascript">',
+		footer: '</script>',
+	},plugins: [
+		multi(),
+		resolve(),
+		commonjs()
+	]
+}, {
+	input: 'src/bundles/server/*.js',
+	treeshake: true,
+	output: {
+		format: 'cjs',
+		file: './project/ServerBundles.js',
+		banner: '/* Bundles as defined from all files in src/bundles/*.js */',
+		intro: '(function (exports) {',
+		outro: '})(this);'
+	},plugins: [
+		multi(),
+		resolve(),
+		commonjs()
+	]
+}, {
+	input: 'src/svelte/main.js',
 	output: {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'build/svelte/bundle.js'
+		file: 'build/svelte/bundle.js',
 	},
 	plugins: [
 		svelte({
@@ -51,7 +81,7 @@ export default {
 	watch: {
 		clearScreen: false
 	}
-};
+}];
 
 function serve() {
 	let started = false;
