@@ -1,31 +1,22 @@
-# Sidebar Add-on Builder, with AppsScripts & Svelte
+# AppleScripts Modules ft. Svelte
 
-This project allows other developers to build a [Google Editor Add-on](https://developers.google.com/gsuite/add-ons/editors/) with a modern "reactive" technology: [Svelte](https://svelte.dev).
+This project is a development template to build AppsScripts projects with [node](https://nodejs.org), [rollupjs](http://rollupjs.org) and [sveltejs](https://svelte.dev), including …
 
-## Intro
+* Installing and **importing npm packages** for either client- or server-side
+* Creating **self-contained modules** whose named exports are available via the created `Import` object
+* Using **Svelte** for front-end GUI development
 
-AppsScript's Editor Add-ons (which we'll call "Sidebar Add-ons" here) are a way for developers to make custom sidebars which accompanies the user's Google Docs, Spreadsheets, Forms, and Slides experience.
+This means AppScripts developers can …
 
-There are a variety of options to the developer to help with building the front-end user interface, among them jQuery, Reactjs, and Vuejs. The latter two are full-featured development environments that can build full-scale web applications, and in turn, a more practically-oriented Sidebar Add-on. In particular, these reactive technologies have tools and features that helps make web applications built with it respond automatically to user interfactions (i.e. they are "reactive").
+* Take advantage of npm's code sharing features
+* Write libraries that are truly modular, with depedency resolution
+* Write front-end GUIs with a "reactive" technology ([Svelte](http://svelte.dev))
 
-Svelte also has those capabilities too, but its implementation has an approach which gives it some compelling advantages particularly suited for **reusing and sharing code** used to make a Google Editor add-on:
 
-* The code is highly organized in reusable components
-* Each component's CSS and business logic is kept all in one file
-* These components can talk to each other in a simple, straight-forward way that does not require learning difficult techniques
-* Those components can published, shared, and reused easily
+## Intro & Motivation
 
-There are additional advantages having to do with **ease in making them**:
+This project began when I tried to see how to use Sveltejs as a frontend "framework" with AppsScripts. As I dug deeper, I realized that some of the underlying technology that Svelte used to work ([rollup](http://rollupjs.org)) would allow for the use of npm packages. This is the result.
 
-* You don't need to know too much about the DOM or Browser APIs
-* You don't need to learn or implement complicated CSS rules
-* It is closer to programming like an AppsScripts project
-* Svelte itself has an online REPL which gives a [full tutorial](https://svelte.dev/repl/hello-world?version=3) of its features
-
-One more final point:
-
-* It scales "up", i.e. …
-* If you can make a sidebar add-on with this tech, you can apply that directly to building a full-scale web application
  
 ## Author & License
 
@@ -37,7 +28,7 @@ Written by Adam Morris [email](mailto:classroomtechtools.ctt@gmail.com) [homepag
 ### Installation
 
 ```bash
-npx degit classroomtechtools/svelty-gas-addon-template new-addon-name
+npx degit classroomtechtools/appscripts-modules-ft-svelte new-addon-name
 cd new-addon-name
 npm install
 ```

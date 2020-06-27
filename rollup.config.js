@@ -28,9 +28,9 @@ export default [{
 	output: {
 		format: 'cjs',
 		file: './project/ServerBundles.js',
-		banner: '/* Bundles as defined from all files in src/bundles/*.js */',
+		banner: '/* Bundles as defined from all files in src/bundles/*.js */\nconst Import = Object.create(null);\n',
 		intro: '(function (exports) {',
-		outro: '})(this);'
+		outro: '})(Import);'
 	},plugins: [
 		multi(),
 		resolve(),

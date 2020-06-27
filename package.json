@@ -13,7 +13,7 @@
     "start": "sirv build/svelte",
     "deploy": "run-s postprocess clasp:push",
     "postprocess": "run-s rm-artifacts build static generate:* stage",
-    "rm-artifacts": "rm -r ./project/*",
+    "rm-artifacts": "rm -fr ./project/*",
     "static": "cp ./src/static/* ./build/staging/",
     "generate": "run-p generate:*",
     "generate:remote": "cp -r ./src/server/* ./project/",
