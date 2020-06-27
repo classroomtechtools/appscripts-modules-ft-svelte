@@ -6,6 +6,8 @@ This project is a development template to build AppsScripts projects with [node]
 * Creating **self-contained modules** whose named exports are available via the created `Import` object
 * Using **Svelte** for front-end GUI development
 
+[![Video](https://img.youtube.com/vi/9dBoLTsDnCw/0.jpg)](https://www.youtube.com/watch?v=9dBoLTsDnCw)
+
 This means AppScripts developers can …
 
 * Take advantage of npm's code sharing features
