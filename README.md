@@ -13,9 +13,11 @@ This means AppScripts developers can …
 * Write front-end GUIs with a "reactive" technology ([Svelte](http://svelte.dev))
 
 
-## Intro & Motivation
+## Motivation
 
 This project began when I tried to see how to use Sveltejs as a frontend "framework" with AppsScripts. As I dug deeper, I realized that some of the underlying technology that Svelte used to work ([rollup](http://rollupjs.org)) would allow for the use of npm packages. This is the result.
+
+I've always tried to figure out a better, easier way to write libraries and to do code reuse in the AppScripts environment.
 
  
 ## Author & License
@@ -25,27 +27,91 @@ Written by Adam Morris [email](mailto:classroomtechtools.ctt@gmail.com) [homepag
 
 ## Quickstart
 
-### Installation
+### Installation and toolchain
 
 ```bash
 npx degit classroomtechtools/appscripts-modules-ft-svelte new-addon-name
 cd new-addon-name
 npm install
+npm run clasp:login
+npm run clasp:create
 ```
 
-### Develop Locally
+You'll now be able to edit files, and use the following command to deploy to appscripts:
+
+```bash
+npm run deploy
+```
+
+That will execute the node script needed for the toolchain to build the appropriate files into `./project` and then uses `clasp push` to push the contents of that folder to the appscripts server.
+
+Test as an add-on, by default a spreadsheet add-on.
+
+## Development & The Toolchain
+
+All of the code that the developer in `./src` writes ends up in `./project`, but bundled as appropriate. The idea is that the dev only writes stuff in `./src/` and server-side code is available as appropriate, while client-side code is bundled up into one file `./projects/index.html` (where the client-side javascript is inlined).
+
+### Npm modules
+
+To include an npm module, you just `npm install <name of package>`. It will then be availble for import, from within `./src/bundles/server` and `./src/buildles/client`. From the name, which one you use depends on whether the target execution environment is the browser or the appscripts project.
+
+From the `./src/bundles/server` location, you can write a file that imports the npm packages, and then exports objects or functions that you want to bring to the appscripts server execution environment.
+
+For example:
+
+```js
+import camelCase from 'lodash/camelCase';
+export const lodash = {camelCase};  // named export
+```
+
+Then, from within `./src/server/ServerSide.js` file, you can use properites on the `Import` variable to get those named exports.
+
+```js
+function myFunction () {
+    const lodash = Import.lodash;  // Import variable bundles named exports
+    return lodash.camelCase('turn string into camel case');
+}
+```
+
+That's how to get npm modules. But wait there's more! 
+
+### Organize your own modules within app
+
+Make a folder inside `./src/bundles/` call it `lib` and a file in there called `MyLibrary`:
+
+```js
+// ./src/bundles/lib/MyLibrary
+import camelCase from 'lodash/camelCase';
+
+export function MyFunction (value) {
+    return camelCase(value)
+}
+```
+
+And then, from within `./src/server/ServerSide.js`, you can do:
+
+```js
+function myFunction () {
+    const func = Import.MyFunction;
+    return func('turn this into camel case');
+}
+```
+
+## Svelte
+
+### Develop Frontend with Svelte
 
 ```bash
 npm run dev
 ```
 
-Open browser in displayed location. Edit files in `local`, which will automatically update. You can build svelte components by editing the files there.
+Open browser in displayed location. Edit files in `src/svelte`; upon save the browswer will be refreshed. You can build svelte components by editing the files there.
 
-Edit the files in `remote` which will be the server-side code.
+For server-side functionality (resulting from `google.script.run` commands), edit the files in `src/sever/` which will be the server-side code.
 
-### Two things special to this context: 
+#### Two things special to this context: 
 
-#### (1) `google.script.run`
+##### (1) `google.script.run`
 
 To use `google.script.run` both locally and after deployment as an appscript project, follow the code examples given in `local/Component.svelte`. In a nutshell:
 
@@ -63,7 +129,7 @@ if (!production) {
 
 You can then use `google.script.run` in either local context or as normal an an appscript project.
 
-#### (2) Manifest (appsscripts.json)
+##### (2) Manifest (appsscripts.json)
 
 The file in `remote/appsscripts.json` is the source of truth and will be overwritten in any subsequent deploy.
 
