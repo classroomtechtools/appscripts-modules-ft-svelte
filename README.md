@@ -1,26 +1,24 @@
-# AppleScripts Modules ft. Svelte
+# Google AppleScripts ft Svelte & Modules
 
-This project is a development template to build AppsScripts projects with [node](https://nodejs.org), [rollupjs](http://rollupjs.org) and [sveltejs](https://svelte.dev), including …
+A starter template for building an Google Apps Scripts project (an editor add-on, web app, etc) using additional technologies:
 
-* Installing and **importing npm packages** for either client- or server-side
-* Creating **self-contained modules** whose named exports are available via the created `Import` object
-* Using **Svelte** for front-end GUI development
+1) [Svelte](https://svelte.dev) to build a front-end interface
+2) [Node](https://nodejs.org), npm packages, and unit testing (coming soon) for local development and remote deployment
+2) Modules, using `import` and `export` syntax for modular, reusable code, thanks to [Rollupjs](http://rollupjs.org) which handles the requisite code bundling automatically
 
 [![Video](https://img.youtube.com/vi/9dBoLTsDnCw/0.jpg)](https://www.youtube.com/watch?v=9dBoLTsDnCw)
 
 This means AppScripts developers can …
 
-* Take advantage of npm's code sharing features
-* Write libraries that are truly modular, with depedency resolution
-* Write front-end GUIs with a "reactive" technology ([Svelte](http://svelte.dev))
-
+* Write front-end GUIs with a "reactive" technology (and be able to apply their learned knowledge outside of appscripts)
+* Take advantage of npm's code sharing features (and get connected to that vast ecosystem)
+* Learn modern practices (and reap the benefits)
 
 ## Motivation
 
 This project began when I tried to see how to use Sveltejs as a frontend "framework" with AppsScripts. As I dug deeper, I realized that some of the underlying technology that Svelte used to work ([rollup](http://rollupjs.org)) would allow for the use of npm packages. This is the result.
 
-I've always tried to figure out a better, easier way to write libraries and to do code reuse in the AppScripts environment.
-
+As someone working in education, it is exciting to be able to use Google's GSuite infrastructure to help teachers and administrators complete their tasks. However, the platform by default does not include the above technologies.
  
 ## Author & License
 
@@ -51,26 +49,30 @@ Test as an add-on, by default a spreadsheet add-on.
 
 ## Development & The Toolchain
 
-All of the code that the developer in `./src` writes ends up in `./project`, but bundled as appropriate. The idea is that the dev only writes stuff in `./src/` and server-side code is available as appropriate, while client-side code is bundled up into one file `./projects/index.html` (where the client-side javascript is inlined).
+All of the code in `./src` ends up in `./project`, but bundled as appropriate. The idea is that the dev only writes stuff in `./src/` and server-side code is available as appropriate, while client-side code is bundled up into one file `./projects/index.html` (where the client-side javascript is inlined).
 
 ### Npm modules
 
-To include an npm module, you just `npm install <name of package>`. It will then be availble for import, from within `./src/bundles/server` and `./src/buildles/client`. From the name, which one you use depends on whether the target execution environment is the browser or the appscripts project.
+To include an npm module, you just `npm install <name of package>`. It will then be available for import.
+
+Due to limitations of the appscripts context, you cannot use `import` in just any file, you have to use it within a file in the `./src/bundles` parent directory. For server-side code (the most common), it must be from inside `./src/bundles/server`, and for the browser (less common, but possible) use `./src/buildles/client`.
 
 From the `./src/bundles/server` location, you can write a file that imports the npm packages, and then exports objects or functions that you want to bring to the appscripts server execution environment.
 
 For example:
 
 ```js
+// ./src/bundles/server/bridge.js
 import camelCase from 'lodash/camelCase';
-export const lodash = {camelCase};  // named export
+export const lodash = {camelCase};
 ```
 
-Then, from within `./src/server/ServerSide.js` file, you can use properites on the `Import` variable to get those named exports.
+Then, from within a file in `./src/server/`, you can use those exported properites on the `Import` variable to get those named exports.
 
 ```js
+// ./src/server/ServerSide.js
 function myFunction () {
-    const lodash = Import.lodash;  // Import variable bundles named exports
+    const {lodash} = Import;  // Import variable bundles named exports
     return lodash.camelCase('turn string into camel case');
 }
 ```
@@ -79,10 +81,10 @@ That's how to get npm modules. But wait there's more!
 
 ### Organize your own modules within app
 
-Make a folder inside `./src/bundles/` call it `lib` and a file in there called `MyLibrary`:
+Make a folder inside `./src/bundles/server` call it `lib` and a file in there called `MyLibrary`:
 
 ```js
-// ./src/bundles/lib/MyLibrary
+// ./src/bundles/server/lib/MyLibrary
 import camelCase from 'lodash/camelCase';
 
 export function MyFunction (value) {
@@ -93,9 +95,10 @@ export function MyFunction (value) {
 And then, from within `./src/server/ServerSide.js`, you can do:
 
 ```js
+// ./src/server/ServerSide.js
 function myFunction () {
-    const func = Import.MyFunction;
-    return func('turn this into camel case');
+    const {MyFunction} = Import;
+    return MyFunction('turn this into camel case');
 }
 ```
 
@@ -107,9 +110,9 @@ function myFunction () {
 npm run dev
 ```
 
-Open browser in displayed location. Edit files in `src/svelte`; upon save the browswer will be refreshed. You can build svelte components by editing the files there.
+Open browser in displayed location. Edit files in `./src/svelte`; upon save the browswer will be refreshed. You can build svelte components by editing the files there.
 
-For server-side functionality (resulting from `google.script.run` commands), edit the files in `src/sever/` which will be the server-side code.
+For server-side functionality (resulting from `google.script.run` commands), edit the files in `./src/sever/` which will be the server-side code.
 
 #### Two things special to this context: 
 
@@ -197,7 +200,7 @@ npm install
 npm run dev
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit from `local`, save it, and watch as your page automatically reloads to see your changes.
+Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit from `./src/svelte`, save it, and watch as your page automatically reloads to see your changes.
 
 Server-side functions can be declared in `remote`, and you can define your manifest there too.
 
