@@ -1,4 +1,4 @@
-# Google AppleScripts ft Svelte & Modules
+# Google AppleScripts Modules ft Svelte
 
 A starter template for building an Google Apps Scripts project (an editor add-on, web app, etc) using additional technologies:
 
