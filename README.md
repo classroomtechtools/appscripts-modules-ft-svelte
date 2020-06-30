@@ -6,13 +6,16 @@ A starter template for building an Google Apps Scripts project using additional 
 2) [Rollupjs](http://rollupjs.org), which lets us incorporate ES Modules for reusable code
 3) [Node](https://nodejs.org), npm packages, and unit testing (coming soon) for local development and remote deployment
 
-[![Video](https://img.youtube.com/vi/9dBoLTsDnCw/0.jpg)](https://www.youtube.com/watch?v=9dBoLTsDnCw)
-
 This means AppScripts developers can …
 
 * Write front-end GUIs with a "reactive" technology (and be able to apply their learned knowledge outside of appscripts)
 * Take advantage of npm's code sharing features (and get connected to that vast ecosystem)
 * Stay on par with JavaScript ecosystem (and reap the benefits)
+
+## Additional Information
+
+1) This essay [On Modules](https://github.com/classroomtechtools/appscripts-modules-ft-svelte/blob/master/on_modules.md) discusses the why and how behind modules. By the end, hopefully you'll have an understanding of some of the design decisions made for this repo.
+2) A video, made early in the process towards making this repo: [![Video](https://img.youtube.com/vi/9dBoLTsDnCw/0.jpg)](https://www.youtube.com/watch?v=9dBoLTsDnCw)
 
 ## Motivation
 
