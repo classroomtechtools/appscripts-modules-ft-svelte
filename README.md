@@ -1,10 +1,10 @@
 # Google AppleScripts Modules ft Svelte
 
-A starter template for building an Google Apps Scripts project (an editor add-on, web app, etc) using additional technologies:
+A starter template for building an Google Apps Scripts project using additional technologies:
 
 1) [Svelte](https://svelte.dev) to build a front-end interface
-2) [Node](https://nodejs.org), npm packages, and unit testing (coming soon) for local development and remote deployment
-2) Modules, using `import` and `export` syntax for modular, reusable code, thanks to [Rollupjs](http://rollupjs.org) which handles the requisite code bundling automatically
+2) [Rollupjs](http://rollupjs.org), which lets us incorporate ES Modules for reusable code
+3) [Node](https://nodejs.org), npm packages, and unit testing (coming soon) for local development and remote deployment
 
 [![Video](https://img.youtube.com/vi/9dBoLTsDnCw/0.jpg)](https://www.youtube.com/watch?v=9dBoLTsDnCw)
 
@@ -12,7 +12,7 @@ This means AppScripts developers can …
 
 * Write front-end GUIs with a "reactive" technology (and be able to apply their learned knowledge outside of appscripts)
 * Take advantage of npm's code sharing features (and get connected to that vast ecosystem)
-* Learn modern practices (and reap the benefits)
+* Stay on par with JavaScript ecosystem (and reap the benefits)
 
 ## Motivation
 
