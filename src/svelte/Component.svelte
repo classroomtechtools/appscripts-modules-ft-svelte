@@ -14,7 +14,7 @@
 
     // callback handlers
     const success = (valueInside, userObj) => {
-        template += valueInside + userObj().config.exclamation;
+        template += ' ' + valueInside + userObj().config.exclamation;
     };
 
     // handle local dev
@@ -39,7 +39,7 @@
             }
         }) )
         .withSuccessHandler(success)
-        .exampleServerSideFunction(' from inside appscripts');
+        .exampleServerSideFunction('from inside appscripts');
 
 
     let html, plaintext;

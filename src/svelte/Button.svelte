@@ -13,7 +13,7 @@
 </script>
 
 <p>
-    <button href="#title" transition:fade={{delay: 3000}} on:click={handleClick}>Put {language} in Title</button>
+    <button href="#title" transition:fade={{delay: 3000}} on:click={handleClick}>Put {language} in the Title</button>
 </p>
 
 <style>

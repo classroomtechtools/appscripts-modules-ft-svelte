@@ -20,7 +20,7 @@ function onInstall (e) {
 
 function showSidebar() {
   const html = HtmlService.createHtmlOutputFromFile('index')
-      .setTitle('Svelty Gas Starter');
+      .setTitle('Starter Svelte App');
   SpreadsheetApp.getUi().showSidebar(html);
 }
 

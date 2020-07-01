@@ -14,15 +14,15 @@
             // language: 'English'  // default not needed
         },
         {
-            greeting: 'nihao',
-            noun: 'shijie',
+            greeting: 'Nihao',
+            noun: 'Shijie',
             template: '${greeting}, ${noun}',
             language: 'Chinese'
         },
         {
-            greeting: 'hao',
-            noun: 'shijie',
-            template: '${noun}${greeting}',
+            greeting: 'Hao',
+            noun: 'Shijie',
+            template: '${noun} ${greeting}',
             language: 'More fluent Chinese'
         },
         {
