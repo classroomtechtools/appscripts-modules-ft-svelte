@@ -16,7 +16,7 @@
     "rm-artifacts": "rm -fr ./project/*",
     "static": "cp ./src/static/* ./build/staging/",
     "generate": "run-p generate:*",
-    "generate:remote": "cp -r ./src/server/* ./project/",
+    "generate:remote": "cp -r ./src/scripts/* ./project/",
     "generate:global": "echo '<style>' > ./build/staging/globalcss.ejs && cat ./build/svelte/global.css >> ./build/staging/globalcss.ejs && echo '</style>' >> ./build/staging/globalcss.ejs",
     "generate:css": "echo '<style>' > ./build/staging/bundlecss.ejs && cat ./build/svelte/bundle.css >> ./build/staging/bundlecss.ejs && echo '</style>' >> ./build/staging/bundlecss.ejs",
     "generate:js": "echo '<script>' > ./build/staging/bundlejs.ejs && cat ./build/svelte/bundle.js >> ./build/staging/bundlejs.ejs && echo '</script>' >> ./build/staging/bundlejs.ejs",
@@ -49,6 +49,7 @@
     "svelte"
   ],
   "dependencies": {
+    "dottie": "file:../../../npm-appscripts-modules/dottie",
     "sirv-cli": "^0.4.4"
   }
 }

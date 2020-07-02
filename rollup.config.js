@@ -8,25 +8,12 @@ import multi from '@rollup/plugin-multi-entry';
 const production = !process.env.ROLLUP_WATCH;
 
 export default [{
-	input: 'src/modules/client/*.js',
-	treeshake: true,
-	output: {
-		format: 'iife',
-		file: './build/staging/clientBundle.ejs',
-		banner: '<!-- Bundle from src/modules/client/ -->\n<script type="application/javascript">',
-		footer: '</script>',
-	},plugins: [
-		multi(),
-		resolve(),
-		commonjs()
-	]
-}, {
-	input: 'src/modules/server/*.js',
+	input: 'src/modules/*.js',
 	treeshake: true,
 	output: {
 		format: 'cjs',
-		file: './project/ServerBundles.js',
-		banner: '/* Bundles as defined from all files in src/modules/*.js */\nconst Import = Object.create(null);\n',
+		file: './project/Bundle.js',
+		banner: '/* Bundle as defined from all files in src/modules/*.js */\nconst Import = Object.create(null);\n',
 		intro: '(function (exports) {',
 		outro: '})(Import);'
 	},plugins: [
