@@ -1,12 +1,28 @@
 <script>
     import {production, setup} from './environment.js';
-    const title = "Title";
-    setup(window);
-    google.script.run.Hey();
+    let title = "Title";
+    let body = 'Initial Value';
+
+    const success = (value) => {
+      title = 'Welcome';
+      body = value;
+    }
+
+    setup({
+      hey: function () {
+        return 'To Appscripts Modules ft Svelte!'
+      }
+    });
+
+    google.script.run
+      .withSuccessHandler(success)
+      .hey();
+
 </script>
 
 <div class:sidebar={!production}>
 <h1>{title}</h1>
+<p>{body}</p>
 </div>
 
 <style>

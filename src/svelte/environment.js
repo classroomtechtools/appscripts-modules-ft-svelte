@@ -9,16 +9,17 @@ For example:
   setup(window);
 </script>
  */
+
+// executing this at import
 export let production = window.hasOwnProperty('google');
 
-export const setup = (global, serverSideFunctions={}) => {
-    if (global === undefined) throw new Error("environment setup requires window variable to work as expected");
-
-    // detect if we are in a local environment, if not, do nothing
-    if (global.hasOwnProperty('google')) return;
+export const setup = (serverSideFunctions={}) => {
+    // have we run already?
+    // note, this is not the same as checking at import time, as above!
+    if (window.hasOwnProperty('google')) return;
 
     // define a mock google object
-    global.google = {
+    window.google = {
         script: {
             run: proxyObject(serverSideFunctions)
         }
@@ -52,13 +53,21 @@ const proxyObject = (serverSideFunctions) => {
         get: function (target, prop, receiver) {
             // if the target already has the prop, return that
             const hasProp = Reflect.get(...arguments);
+            let locallyReturnedValue = undefined;
             if (hasProp) return hasProp;
+
+            if (!production) {
+                if (prop in serverSideFunctions) {
+                    locallyReturnedValue = serverSideFunctions[prop].call();
+                }
+            }
 
             // otherwise assume that this is a server-side function
             // not yet defined in the package (for local dev)
-            // and we'll just call the successHandler after a delay to simulate
+            // and we'll just call the successHandler after a delay
             return (value) => {
-                setTimeout(() => target._state.successHandler(value, target._state.userObj), 2000);
+                mockSuccess(target._state.successHandler, locallyReturnedValue !== undefined ? locallyReturnedValue : value , target._state.userObj);
+                // setTimeout(() => target._state.successHandler(value, target._state.userObj), 2000);
             };
         }
     }
@@ -66,5 +75,6 @@ const proxyObject = (serverSideFunctions) => {
     return new Proxy(target, handler);
 }
 
-
-
+export let mockSuccess = (func, parameter=undefined, obj={}) => {
+    setTimeout( () => { func(parameter, obj); }, 2000);
+};

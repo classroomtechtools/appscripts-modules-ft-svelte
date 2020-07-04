@@ -5,7 +5,11 @@
     import {setup} from './environment.js';
     import {slide} from 'svelte/transition';
 
-    setup(window);
+    setup({
+        exampleServerSideFunction: (value) => {
+            return 'from locally mocked server-side appscripts!';
+        }
+    });
 
     // prop declarations
     export let greeting = 'hello';
