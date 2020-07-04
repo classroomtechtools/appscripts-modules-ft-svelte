@@ -2,8 +2,10 @@
     // imports
     import Button from './Button.svelte';
     import interpolate from './interpolate.js';
-    import {production, runner} from './environment.js';
+    import {setup} from './environment.js';
     import {slide} from 'svelte/transition';
+
+    setup(window);
 
     // prop declarations
     export let greeting = 'hello';
@@ -16,19 +18,6 @@
     const success = (valueInside, userObj) => {
         template += ' ' + valueInside + userObj().config.exclamation;
     };
-
-    // handle local dev
-    if (!production) {
-        /*
-            We have to check for production to see if we need to set up window as below
-            So it works both in our local and remote environments
-        */
-        window.google = {
-            script: {
-                run: runner({ /* optionally define mock server-side functions */})
-            }
-        }
-    }
 
     // execute serverSideFunction (immediately)
     google.script.run
