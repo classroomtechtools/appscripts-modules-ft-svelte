@@ -1,4 +1,8 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # Google AppleScripts Modules ft Svelte
+<img src="https://brainysmurf.github.io/appscripts_modules_ft_svelte.png" />
+
 A starter template for building Google AppsScripts [GAS] projects with modules. The technologies included are:
 
 1. [Svelte](https://svelte.dev) for the front-end
