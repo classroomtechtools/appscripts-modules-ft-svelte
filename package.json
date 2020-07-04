@@ -49,7 +49,6 @@
     "svelte"
   ],
   "dependencies": {
-    "dottie": "file:../../../npm-appscripts-modules/dottie",
     "sirv-cli": "^0.4.4"
   }
 }

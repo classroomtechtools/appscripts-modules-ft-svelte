@@ -56,9 +56,10 @@ const proxyObject = (serverSideFunctions) => {
             let locallyReturnedValue = undefined;
             if (hasProp) return hasProp;
 
-            if (!production) {
-                if (prop in serverSideFunctions) {
-                    locallyReturnedValue = serverSideFunctions[prop].call();
+            if (!production && (prop in serverSideFunctions)) {
+                return (passed) => {
+                    const value = serverSideFunctions[prop].call(null, passed);
+                    mockSuccess(target._state.successHandler, value, target._state.userObj);
                 }
             }
 
@@ -66,7 +67,7 @@ const proxyObject = (serverSideFunctions) => {
             // not yet defined in the package (for local dev)
             // and we'll just call the successHandler after a delay
             return (value) => {
-                mockSuccess(target._state.successHandler, locallyReturnedValue !== undefined ? locallyReturnedValue : value , target._state.userObj);
+                mockSuccess(target._state.successHandler, value , target._state.userObj);
                 // setTimeout(() => target._state.successHandler(value, target._state.userObj), 2000);
             };
         }

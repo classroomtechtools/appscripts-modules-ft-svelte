@@ -6,8 +6,8 @@
     import {slide} from 'svelte/transition';
 
     setup({
-        exampleServerSideFunction: (value) => {
-            return 'from locally mocked server-side appscripts!';
+        exampleServerSideFunction: function (value) {
+            return value + ' (locally)';
         }
     });
 
@@ -20,7 +20,8 @@
 
     // callback handlers
     const success = (valueInside, userObj) => {
-        template += ' ' + valueInside + userObj().config.exclamation;
+        const obj = userObj();
+        template += ' ' + valueInside + obj.config.exclamation + ' #' + (obj.index + 1);
     };
 
     // execute serverSideFunction (immediately)
@@ -29,7 +30,8 @@
             config: {
                 exclamation: '!',
                 question: '?'
-            }
+            },
+            index
         }) )
         .withSuccessHandler(success)
         .exampleServerSideFunction('from inside appscripts');
