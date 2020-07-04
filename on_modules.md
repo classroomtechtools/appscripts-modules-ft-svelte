@@ -83,9 +83,9 @@ Given the names and comments I decided to use, I’m hopefully making it clear t
 
 In GAS, variables that are declared _in the global scope_ in any file, for example in `main.gs` _may or may not be_ available in other files, for example `utilities.gs`. For this reason, it is a mistake to try and use `module()` in the global scope in `main.gs`. It might work, but it might not. It’s not guaranteed, and in programming let’s work with things we can depend on.
 
-> Sidebar: You can check out what Google says about the parsing process on your own for more information on this, but for our purposes let’s assume that if it might not work sometimes, let’s assume it doesn’t ever work.  
+> Sidebar: You can check out [what Google says about the parsing process](https://github.com/classroomtechtools/appscripts-modules-ft-svelte/blob/master/on_modules.md) on your own for more information on this, but for our purposes let’s assume that if it might not work sometimes, let’s assume it doesn’t ever work. It's worth noting that the parsing process was — quite sensibly — meant to simulate the behaviour in browsers in how it parses `<script>` tags, rather executing individuals files as on node.
 
-Despite the caveat above, what is guaranteed, however, is that _we can depend on variables_ such as `module` being available in the _endpoint scope_. 
+Despite the caveat about implementation details above, what is guaranteed, however, is that _we can depend on_ variables such as `module` being available in the _endpoint scope_. 
 
 The way I visualize what happens when you click on play on a function in the online editor, for example, is that all the code in all files which are in the global scope level gets concatenated into one invisible file in some sort of preflight operation, and executed as a single file first. Only after that is the endpoint scope (the function you chose to have executed) invoked and executed.
 
@@ -257,7 +257,7 @@ All that effort to understand modules, and it turns out the coolest part isn’t
 
 However, let’s see if we can’t use these concepts to see how we could possibly bring es modules to GAS. First and foremost, however, is that there is no way we can get the `import` and `export` keywords to work in the runtime. Only Google and its implementation it offers can do that.
 
-But remember the bundling technology referred to above? A bundler is software that takes some code and wraps it so that it is modular. What if we littered `import` statements in a different JavaScript context like Node which would know how to execute those import statement, and trained our bundlers to instead reverse the process? Turned those imports into IIFEs. So we could write them locally and then deploy to AppsScripts in a way it can execute.
+But remember the bundling technology referred to above? A bundler is software that takes some code and wraps it so that it is modular. What if we littered `import` statements in a different JavaScript context like Node which would know how to execute those import statement, and trained our bundlers to instead reverse the process? Turne those imports into IIFEs. So we could write them locally and then deploy to AppsScripts in a way it can execute.
 
 Turns out, there is a whole industry of software doing exactly that! Hmmm....
 
@@ -331,7 +331,7 @@ The other issue with the above is that it pollutes the global scope, which is an
 ## Let’s get creative
 I figured out a way, but presenting it without the essay above would be quite esoteric. In any case. Presented here is how we can incorporate es modules to AppsScripts:
 
-On our local environment with node, let’s define a directory whereby all JavsScript files there will be written as es modules. Our bundler can then convert all those files into a single file, wrapped in a module. For example:
+On our local environment with node, let’s define a directory whereby all JavsScript files there will be written as es modules. Our bundler can then convert all those files into a single file, wrapped as a module. For example:
 
 ```js
 // modules/moduleA.js
@@ -369,7 +369,7 @@ function MyFunction () {
 }
 ```
 
-If we change the name of `Modules` to `Import`, we can make it interesting:
+If we change the name of `Modules` to `Import`, we can make it look more like an actual quote-unquote "import statement":
 
 ```js
 function MyFunction () {
