@@ -3,10 +3,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A starter template for building Google AppsScripts [GAS] projects with modules. The technologies included are:
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 A starter template for building Google AppsScripts [GAS] projects with modular libraries. You can write self-contained modules, and use them in your app anywhere you need them. Since they’re modules, you can reuse them in other projects, publish them, share, and use in your other projects.
 
 Also, you can build your front-end with Svelte as the front-end. (Which is exciting in and of itself … but the really amazing thing is the modular approach!)
@@ -160,7 +156,8 @@ directory | explanation
 build | target subdirectory for build process
 rollup.config.js | Configuration for rollupjs
 
-## ## Frontend Development with Svelte
+## More about Frontend Development with Svelte
+
 ### Four things special to this context:
 
 #### (1) `google.script.run`
