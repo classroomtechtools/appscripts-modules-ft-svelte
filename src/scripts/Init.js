@@ -19,11 +19,8 @@ function onInstall (e) {
 }
 
 function showSidebar() {
+  // do not need to use templating with Svelte, it'll all inline
   const html = HtmlService.createHtmlOutputFromFile('index')
       .setTitle('Starter Svelte App');
   SpreadsheetApp.getUi().showSidebar(html);
-}
-
-function include (filename) {
-  return HtmlService.createHtmlOutputFromFile(filename).getContent();
 }
