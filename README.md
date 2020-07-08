@@ -1,20 +1,33 @@
 # Google AppleScripts Modules ft Svelte
-A starter template for building Google AppsScripts [GAS] projects with modules. The technologies included are:
+<img src=“https://brainysmurf.github.io/appscripts_modules_ft_svelte.png” />
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A starter template for building Google AppsScripts [GAS] projects with modular libraries. You can write self-contained modules, and use them in your app anywhere you need them. Since they’re modules, you can reuse them in other projects, publish them, share, and use in your other projects.
+
+Also, you can build your front-end with Svelte as the front-end. (Which is exciting in and of itself … but the really amazing thing is the modular approach!)
+
+## Author & License
+Written by Adam Morris [email](mailto:classroomtechtools.ctt@gmail.com) [homepage](http://classroomtechtools.com/). Released as Open Source, MIT.
+
+## Why?
+What are modules, and why would we want to use them? This essay [On Modules](https://github.com/classroomtechtools/appscripts-modules-ft-svelte/blob/master/on_modules.md) discusses this. But the upshot is because they are self-contained, and you can reuse them.
+
+AppsScripts needs this sort of stuff, really.
+
+Also, you can test it locally!
+
+## What is it?
+This package started out by research into how to incorporate Svelte into an add-on or AppsScripts project. While looking at doing that, I realized that some of the underlying technology Svelte utilizes also could be used to enable modules in AppsScripts.
+
+The technologies included in this starter kit are:
 
 1. [Svelte](https://svelte.dev) for the front-end
-2. AppScripts scripts for the backend, as per the normal runtime, but with additional `Import` global variable
-3. [Rollupjs](http://rollupjs.org) to bundle internal modules — either internal ones or npm ones(!) — which become properties on `Import` variable
-4. [Node](https://nodejs.org) for local development and npm module installation
-5. [Clasp](https://github.com/google/clasp) for deployment
+2. [Rollupjs](http://rollupjs.org) to bundle internal modules — either internal ones or npm ones(!) — which become properties on `Import` variable
+3. [Node](https://nodejs.org) for local development and npm module installation
+4. [Ava](https://github.com/avajs/ava) for unit testing
 
-This means AppScripts developers can …
-
-* Write front-end GUIs with a "reactive" technology
-* Write AppScripts server-side scripts as normal, with additional ability to import modules, either internal ones to the project, or external ones such as published by npm
-* Test locally
-* Connect with other JavaScript ecosystems
-
-## Quickstart
+## Quickstart: Frontend with Svelte (optional)
 Get the default app running in your local browser:
 
 ```bash
@@ -24,9 +37,17 @@ npm install
 npm run dev
 ```
 
-Then point your browser to the displayed location.
+Then point your browser to the displayed location. Then you’ll see the default application in your browser.
 
-To deploy:
+The entire frontend  lives inside of `./src/project/index.html` locally, and when deployed will be just `index.html` in your project. All of the required JavaScript and CSS is inlined into that file. That way, to deliver the app with AppsScripts, all we need to do is:
+
+```js
+const html = HtmlService.createHtmlOutputFromFile('index');
+```
+
+You can edit the Svelte app from the files located at `./src/svelte`. It’s build in exactly the same way as any normal Svelte app.
+
+To see it in action line, deploy it:
 
 ```bash
 npm run clasp:login
@@ -35,70 +56,67 @@ rpm run deploy
 npm run clasp:open
 ```
 
-The `clasp:create` command ensures that clasp uses the `./project` folder to push files to the new project.
-
-The `deploy` command builds the project for deployment, and then issues the `clasp deploy` command.
+The `clasp:create` command ensures that clasp uses the `./project` folder as the source form which to push files to the AppsScripts project.
 
 > The project provides these `clasp:xyz` commands for convenience, but it is still using `.clasp.json` and `.clasprc.json` as normal.
 
-## Why
-Modules don’t exist in the AppsScripts platform, but they should!
+## Quickstart: Modules
+From above, we see that the developer works inside of one directory, and the build process ensures that all of the frontend application code is bundled up into one file, the `index.html` file. The same sort of pattern applies with writing modules. Whereas with frontend development, the build process is automatic with changes immediately updating in the browser, there are some extra steps to take with modules. (But they’re worth it!)
 
-1. This essay [On Modules](https://github.com/classroomtechtools/appscripts-modules-ft-svelte/blob/master/on_modules.md) discusses the why and how behind modules. By the end, hopefully you'll have an understanding of some of the design decisions made for this repo.
+Anything JavaScript code you write in `./src/modules` is primed to be bundled up into one big file and placed into `./src/project/Bundle.js`.  But you have to be explicit and tell the bundler what variables to export though, and for that we use the `export` statement.
 
-This project began when I tried to see how to use Sveltejs as a frontend "framework" with AppsScripts. As I dug deeper, I realized that some of the underlying technology that Svelte used to work ([rollup](http://rollupjs.org)) would allow for the use of npm packages. This is the result.
-
-## Author & License
-Written by Adam Morris [email](mailto:classroomtechtools.ctt@gmail.com) [homepage](http://classroomtechtools.com/). Released as Open Source, MIT.
-
-## Development
-This starter kit gives you context in which to change the files within `src`, which allows you to see changes immediately in the browser. You can also deploy easily to your AppsScripts project.
-
-For example, you can switch out the contents in order to enable different applications:
-
-```bash
-# from inside new-project-name directory
-rm -r src
-cp -r examples/helloworld/src src
-npm run dev
+```js
+// ./src/modules/exmaple.js
+const something = 'inside a module';
+export {something};
 ```
 
-You can restore the default application with the following:
+When you’ve made a new file, or edited and existing one, kick off the build process with the command:
 
 ```bash
-# from inside new-project-name directory
-rm -r src
-cp -r examples/defaultapp/src src
-npm run dev
+npm run bundle
 ```
 
-Or alternatively, use symlinks:
+That will run a few commands which will prepare all of the files into `./src/project/`, ready for production use.
 
-```bash
-# from inside new-project-name directory
-rm -r src  # one time
-ln -hfs examples/helloworld/src src  # thereafter
+From inside the `Bundle.js` file, the exported variables are placed on the `Import` variable as a namespace. You will then be able to access the exported objects, functions, or variables by using the `Import` variable:
+
+```js
+// ./src/scripts/Code.js
+function MyFunction () {
+    const module = Import.module;
+    // or
+    const {module} = Import;
+}
 ```
 
-The latter hint enables the use of one directory for the deployment, with other directories as the local environment. 
+Then, you can use that `something` variable from anywhere inside the following from `./src/scripts/`  like so:
+
+```js
+function MyFunction () {
+    const {something} = Import;
+    Logger.log(something);
+}
+```
 
 ### Directory Structure
+
 The directory structure helps to understand how it works under the hood. The following represents the structure after Quickstart:
 
 ```
 ├── .clasp.json
 ├── README.md
-├── build  
+├── build
 ├── examples
-│   ├── default
-│   └── helloworld
+│   ├── default
+│   └── helloworld
 ├── on_modules.md
 ├── package.json
 ├── project
-│   ├── Bundle.js
-│   ├── Code.js
-│   ├── appsscript.json
-│   └── index.html
+│   ├── Bundle.js
+│   ├── Code.js
+│   ├── appsscript.json
+│   └── index.html
 ├── rollup.config.js
 └── src
     ├── modules
@@ -122,7 +140,7 @@ file | explanation
 Bundle.js | Any modules written in `./src/modules/` ends up bundled up here
 Code.js | Any `./src/appscripts` files end up here (with the name as appropriate)
 appsscripts.json | The manifest; this is the source of truth
-index.html | If building a front-end svelte application, this can be served with `HtmlService.createHtmlOutputFromFile` 
+index.html | If building a front-end svelte application, this can be served with `HtmlService.createHtmlOutputFromFile`
 
 The following directories may need some maintenance from the developer, as appropriate:
 
@@ -138,37 +156,10 @@ directory | explanation
 build | target subdirectory for build process
 rollup.config.js | Configuration for rollupjs
 
-## Writing Modules
-The `./src/modules` directory is where regular es modules can be written, with `import` and `export` statement. Anything exported by a module at that directory path, will be available as a property on the `Import` global variable from a regular AppsScripts file.
+## ## Frontend Development with Svelte
+### Four things special to this context:
 
-Regular AppsScripts files are written in `./src/appscripts` directory. The `Import` global variable can only be used meaningfully from within a function declaration, such as an endpoint:
-
-```js
-// ./src/modules/module.js
-const str = 'hello';
-export {str}
-
-// ./src/appscripts/Code.js
-function MyFunction () {
-	const {str} = Import;
-	Logger.log(str);  // 'hello'
-}
-```
-
-## Writing the Frontend with Svelte
-### Develop Frontend with Svelte
-
-```bash
-npm run dev
-```
-
-Open browser in displayed location. Edit files in `./src/svelte`; upon save the browser will be refreshed. You can build svelte components by editing the files there.
-
-For server-side functionality (resulting from `google.script.run` commands), edit the files in `./src/appscripts/` as normally you would for a project. 
-
-#### Four things special to this context:
-
-##### (1) `google.script.run`
+#### (1) `google.script.run`
 To use `google.script.run` both locally and after deployment as an appscript project, you can use the provided functionality from `./src/svelte/environment.js`. In a nutshell:
 
 ```js
@@ -176,45 +167,38 @@ import { setup } from './environment';
 setup(window);
 // or
 setup(window, {
-	serverSideFunction: () => {
-		// do something (only run when in local)
-	}
+    serverSideFunction: () => {
+        // do something (only run when in local)
+    }
 });
 ```
 
 You can then use `google.script.run` in either local context or as normal for an appscript project. If you want more control on your local development, you can define server-side functionality by passing an object that is a mocked, as indicated above.
 
-##### (2) Manifest (appsscripts.json)
+#### (2) Manifest (appsscripts.json)
 The file in `./project/appsscripts.json` is the source of truth and will be overwritten in any subsequent deploy. If you need to change scopes, do it here (directly from inside this folder)
 
-##### (3) Serving the front-end code
+#### (3) Serving the front-end code
 
 All client-side JavaScript code, CSS, and the HTML are all bundled up into `index.html` as inline. This means you can use `HtmlService.createHtmlOutputFromFile` to serve; no need to evaluate the source, so that other files can be included.
 
-##### (4) External libraries
-If you need to change the headers served at the index.html context (for example if you want to add an external library from a CDN), you'll need to change them in two places:
+#### (4) External libraries
+If you need to change the headers served at the index.html context (for example if you want to add an external library from a CDN), you’ll need to change them in two places:
 
 * The file `static/header.ejs` (for local development)
 * The file `project/index.html` (for deployment)
 
-### Deployment
-First, do this:
+## Unit Testing
+Write your tests inside `./tests/`, and execute with `npm run test`. Remember, you’ll have to ensure it’s bundled, so maybe use this instead:
 
-```bash
-npm run clasp:login
-npm run clasp:create
+```js
+npm run bundle && npm run test
 ```
 
-The `clasp:create` command is just a regular `clasp create` command with —root-dir passed as `./project`. If you already have a `.clasp.json` file you want to use (and is located in the parent directory), you can alternatively edit your `.clasp.json` file so that the json contains `"rootDir":"./project”`. Subsequent deploy commands will use that as the root directory (source) to push files.
+Test your bundled code by importing, but use the require syntax and relative path:
 
-After that, just:
-
-```bash
-npm run deploy
+```js
+const module = require('../scr/modules/module.js');
 ```
 
-That will run the necessary build sequence, and then will push to the project.
-
-## TODO
-* More details about how why svelte, how to use svelte
-* Minification
+Consult Ava for instructions on how to use that framework.
