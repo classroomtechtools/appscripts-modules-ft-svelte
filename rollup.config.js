@@ -15,7 +15,7 @@ export default [{
 		file: './project/Bundle.js',
 		banner: '/* Bundle as defined from all files in src/modules/*.js */\nconst Import = Object.create(null);\n',
 		intro: '(function (exports, window) {',
-		outro: '})(Import, this);'
+		outro: '})(Import, this);\ntry{exports.Import = Import;}catch(e){}'
 	},plugins: [
 		multi(),
 		resolve(),
