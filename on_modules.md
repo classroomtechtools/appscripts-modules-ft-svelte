@@ -220,7 +220,7 @@ function doSomething (value) {
     return normalize(value);
 }
 
-export {turnDomainIntoHttpAddress};
+export {doSomething};
 ```
 
 Using `import` and `export` in this kind of pattern, which the latest JavaScript syntax accepts as normal. You can define modules, and then use them elsewhere, declaring your dependencies, and exporting functionality, all while not polluting the global scope. It’s orchestrated all for you.
@@ -335,10 +335,12 @@ On our local environment with node, let’s define a directory whereby all JavsS
 
 ```js
 // modules/moduleA.js
-export function incrementor(value) { return value + 1; }
+incrementor(value) { return value + 1; }
+export {incrementor}
 
 // modules/mobuldeB.js
-export function decrementor() { return value - 1; }
+function decrementor() { return value - 1; }
+export {decrementor}
 ```
 
 Our bundler produces the file:
