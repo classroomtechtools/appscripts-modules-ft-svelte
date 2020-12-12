@@ -33,6 +33,7 @@ Get the default app running in your local browser:
 ```bash
 npx degit classroomtechtools/appscripts-modules-ft-svelte new-project-name
 cd new-project-name
+npm init  # overwrite package name, author, etc
 npm install
 npm run dev
 ```
