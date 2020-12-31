@@ -1,0 +1,16 @@
+{
+    "source": {
+        "include": ["src/modules/example.js"]
+    },
+    "plugins": ["plugins/markdown"],
+    "templates": {
+        "referenceTitle": "Google AppsScipts Modules ft Svelte by Classroom Tech Tools"
+    },
+    "markdown": {
+        "excludeTags": ["author"]
+    },
+    "opts": {
+        "template": "../jsdoc-template",
+        "destination": "./docs"
+    }
+}

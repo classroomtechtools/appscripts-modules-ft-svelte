@@ -29,7 +29,8 @@
     "clasp:logout": "clasp logout",
     "clasp:logs": "clasp logs",
     "clasp:push": "clasp push",
-    "clasp:tests": "clasp run tests"
+    "clasp:tests": "clasp run tests",
+    "generate-docs": "node_modules/.bin/jsdoc --configure jsdoc-config.json --verbose --readme README.md"
   },
   "devDependencies": {
     "@google/clasp": "^2.3.0",
@@ -37,15 +38,16 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-multi-entry": "^3.0.1",
     "@rollup/plugin-node-resolve": "^8.1.0",
+    "ava": "^3.10.0",
     "ejs-cli": "^2.2.0",
+    "jsdoc": "^3.6.6",
     "npm-run-all": "^4.1.5",
     "rollup": "^2.19.0",
     "rollup-plugin-hypothetical": "^2.1.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "~6.1.1",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.0.0",
-    "ava": "^3.10.0"
+    "svelte": "^3.0.0"
   },
   "keywords": [
     "google",

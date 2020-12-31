@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+      Home - Documentation
+  </title>
+
+  <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+  
+
+  
+
+  <!-- start Mixpanel -->
+  <script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("1919205b2da72e4da3b9b6639b444d59");</script>
+  <!-- end Mixpanel -->
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li  class="active" >
+        <a href="index.html">
+          
+          
+            <svg fill="#178232" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      Google AppsScipts Modules ft Svelte by Classroom Tech Tools
+    </h3>
+
+    
+
+    
+  </nav>
+
+  <div id="main">
+    
+
+    
+      
+
+
+
+    
+
+      
+
+
+  <section class="readme">
+    <article>
+      <h1>Google AppleScripts Modules ft Svelte</h1>
+<img src="https://brainysmurf.github.io/appscripts_modules_ft_svelte.png" />
+<p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></p>
+<p>This repo is a template repo that gives the developer a file structure and node scripts that enables advanced modularity within AppsScripts:</p>
+<ul>
+<li>Write a web app with a front-end interface that utilizes Svelte.js</li>
+<li>Write a package that can be published as an AppsScripts library, but is also an npm module</li>
+<li>Write another one with the same architecture, and import the first one into the second one</li>
+</ul>
+<p>Basically, it's technology based on Svelte and its underpinning tech to write modules, which you can reuse in other projects, publish them, share.</p>
+<h2>Author &amp; License</h2>
+<p>Written by Adam Morris <a href="mailto:classroomtechtools.ctt@gmail.com">email</a> <a href="http://classroomtechtools.com/">homepage</a>. Released as Open Source, MIT.</p>
+<h2>Quickstart: Frontend with Svelte (optional)</h2>
+<p>Get the default app running in your local browser:</p>
+<pre class="prettyprint source lang-bash"><code>npx degit classroomtechtools/appscripts-modules-ft-svelte new-project-name
+cd new-project-name
+npm init  # overwrite package name, author, etc
+npm install
+npm run dev
+</code></pre>
+<p>Then point your browser to the displayed location. Then you’ll see the default application in your browser.</p>
+<p>The entire frontend lives inside of <code>./src/project/index.html</code> locally, and when deployed will be just <code>index.html</code> in your project. All of the required JavaScript and CSS is inlined into that file. That way, to deliver the app with AppsScripts, all we need to do is:</p>
+<pre class="prettyprint source lang-js"><code>const html = HtmlService.createHtmlOutputFromFile('index');
+</code></pre>
+<p>You can edit the Svelte app from the files located at <code>./src/svelte</code>. It’s built in exactly the same way as any normal Svelte app.</p>
+<p>To see it in action on an AppsScripts project, deploy it:</p>
+<pre class="prettyprint source lang-bash"><code>npm run clasp:login
+npm run clasp:create
+rpm run deploy
+npm run clasp:open
+</code></pre>
+<p>The <code>clasp:create</code> command ensures that clasp uses the <code>./project</code> folder as the source form which to push files to the AppsScripts project.</p>
+<blockquote>
+<p>The project provides these <code>clasp:xyz</code> commands for convenience, but it is still using <code>.clasp.json</code> and <code>.clasprc.json</code> as normal.</p>
+</blockquote>
+<p>You don't have to use Svelte, you could just use the modular approach instead.</p>
+<h2>Quickstart: Modules</h2>
+<p>From above, we see that the developer works inside of one directory, and the build process ensures that all of the frontend application code is bundled up into one file, the <code>index.html</code> file. The same sort of pattern applies with writing modules. Whereas with frontend development, the build process is automatic with changes immediately updating in the browser, there are some extra steps to take with modules. (But they’re worth it!)</p>
+<p>Any JavaScript code you write in <code>./src/modules</code> is primed to be bundled up into one big file and placed into <code>./src/project/Bundle.js</code>.  But you have to be explicit and tell the bundler what variables to export though, and for that we use the <code>export</code> statement.</p>
+<pre class="prettyprint source lang-js"><code>// ./src/modules/exmaple.js
+const something = 'inside a module';
+export {something};
+</code></pre>
+<p>When you’ve made a new file, or edited and existing one, kick off the build process with the command:</p>
+<pre class="prettyprint source lang-bash"><code>npm run bundle
+</code></pre>
+<p>That will run a few commands which will prepare all of the files into <code>./src/project/</code>, ready for production use, which is also deployed with clasp.</p>
+<p>From inside the <code>Bundle.js</code> file, the exported variables are placed on the <code>Import</code> variable as a namespace. You will then be able to access the exported objects, functions, or variables by using the <code>Import</code> variable:</p>
+<pre class="prettyprint source lang-js"><code>// ./src/scripts/Code.js
+function MyFunction () {
+    const module = Import.module;
+    // or
+    const {module} = Import;
+}
+</code></pre>
+<p>Then, you can use that <code>something</code> variable from anywhere inside the following from <code>./src/scripts/</code>  like so:</p>
+<pre class="prettyprint source lang-js"><code>function MyFunction () {
+    const {something} = Import;
+    Logger.log(something);
+}
+</code></pre>
+<h3>Motivation</h3>
+<p>Why would we want to use this?</p>
+<ul>
+<li>
+<p>AppsScripts needs this sort of stuff, really: A modularized approach that can be reshared, and reimported to other projects</p>
+</li>
+<li>
+<p>You can test it locally!</p>
+</li>
+</ul>
+<p>This package started out by research into how to incorporate Svelte into an add-on or AppsScripts project. While looking at doing that, I realized that some of the underlying technology Svelte utilizes also could be used to enable modules in AppsScripts.</p>
+<p>The technologies included in this starter kit are:</p>
+<ol>
+<li><a href="https://svelte.dev">Svelte</a> for the front-end</li>
+<li><a href="http://rollupjs.org">Rollupjs</a> to bundle internal modules — either internal ones or npm ones(!) — which become properties on <code>Import</code> variable</li>
+<li><a href="https://nodejs.org">Node</a> for local development and npm module installation</li>
+<li><a href="https://github.com/avajs/ava">Ava</a> for unit testing</li>
+</ol>
+<h3>Directory Structure</h3>
+<p>The directory structure helps to understand how it works under the hood. The following represents the structure after Quickstart:</p>
+<pre class="prettyprint source"><code>├── .clasp.json
+├── README.md
+├── build
+├── examples
+│   ├── default
+│   └── helloworld
+├── on_modules.md
+├── package.json
+├── project
+│   ├── Bundle.js
+│   ├── Code.js
+│   ├── appsscript.json
+│   └── index.html
+├── rollup.config.js
+└── src
+    ├── modules
+    ├── scripts
+    ├── static
+    └── svelte
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>directory</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>README.jd</td>
+<td>documentation</td>
+</tr>
+<tr>
+<td>examples</td>
+<td>sample applications</td>
+</tr>
+<tr>
+<td>on_modules.md</td>
+<td>Further reading on modules</td>
+</tr>
+<tr>
+<td>package.json</td>
+<td>npm configuration</td>
+</tr>
+<tr>
+<td>project</td>
+<td>Target directory for build process, and the source used by clasp to push</td>
+</tr>
+<tr>
+<td>src</td>
+<td>The area where developer works</td>
+</tr>
+</tbody>
+</table>
+<p>Knowing about the project directory contents is useful:</p>
+<table>
+<thead>
+<tr>
+<th>file</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bundle.js</td>
+<td>Any modules written in <code>./src/modules/</code> ends up bundled up here</td>
+</tr>
+<tr>
+<td>Code.js</td>
+<td>Any <code>./src/appscripts</code> files end up here (with the name as appropriate)</td>
+</tr>
+<tr>
+<td>appsscripts.json</td>
+<td>The manifest; this is the source of truth</td>
+</tr>
+<tr>
+<td>index.html</td>
+<td>If building a front-end svelte application, this can be served with <code>HtmlService.createHtmlOutputFromFile</code></td>
+</tr>
+</tbody>
+</table>
+<p>The following directories may need some maintenance from the developer, as appropriate:</p>
+<table>
+<thead>
+<tr>
+<th>directory</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.clasp.json</td>
+<td>Created upon <code>npm run clasp:create</code></td>
+</tr>
+<tr>
+<td>.clasprc.json</td>
+<td>(opt) if developer wants to check logs, run commands remotely</td>
+</tr>
+</tbody>
+</table>
+<p>The following directories are used by internal build processes:</p>
+<table>
+<thead>
+<tr>
+<th>directory</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>build</td>
+<td>target subdirectory for build process</td>
+</tr>
+<tr>
+<td>rollup.config.js</td>
+<td>Configuration for rollupjs</td>
+</tr>
+</tbody>
+</table>
+<h2>More about Frontend Development with Svelte</h2>
+<h3>Four things special to this context:</h3>
+<h4>(1) <code>google.script.run</code></h4>
+<p>To use <code>google.script.run</code> both locally and after deployment as an appscript project, you can use the provided functionality from <code>./src/svelte/environment.js</code>. In a nutshell:</p>
+<pre class="prettyprint source lang-js"><code>import { setup } from './environment';
+setup(window);
+// or
+setup(window, {
+    serverSideFunction: () => {
+        // do something (only run when in local)
+    }
+});
+</code></pre>
+<p>You can then use <code>google.script.run</code> in either local context or as normal for an appscript project. If you want more control on your local development, you can define server-side functionality by passing an object that is a mocked, as indicated above.</p>
+<h4>(2) Manifest (appsscripts.json)</h4>
+<p>The file in <code>./project/appsscripts.json</code> is the source of truth and will be overwritten in any subsequent deploy. If you need to change scopes, do it here (directly from inside this folder)</p>
+<h4>(3) Serving the front-end code</h4>
+<p>All client-side JavaScript code, CSS, and the HTML are all bundled up into <code>index.html</code> as inline. This means you can use <code>HtmlService.createHtmlOutputFromFile</code> to serve; no need to evaluate the source, so that other files can be included.</p>
+<h4>(4) External libraries</h4>
+<p>If you need to change the headers served at the index.html context (for example if you want to add an external library from a CDN), you’ll need to change them in two places:</p>
+<ul>
+<li>The file <code>static/header.ejs</code> (for local development)</li>
+<li>The file <code>project/index.html</code> (for deployment)</li>
+</ul>
+<h2>Unit Testing</h2>
+<p>Write your tests inside <code>./tests/</code>, and execute with <code>npm run test</code>. Remember, you’ll have to ensure it’s bundled, so maybe use this instead:</p>
+<pre class="prettyprint source lang-js"><code>npm run bundle && npm run test
+</code></pre>
+    </article>
+  </section>
+
+
+    
+
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/pagelocation.js"></script>
+
+  
+
+</body>
+</html>

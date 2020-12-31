@@ -3,31 +3,19 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A starter template for building Google AppsScripts [GAS] projects with modular libraries. You can write self-contained modules, and use them in your app anywhere you need them. Since they’re modules, you can reuse them in other projects, publish them, share, and use in your other projects.
+This repo is a template repo that gives the developer a file structure and node scripts that enables advanced modularity within AppsScripts:
 
-Also, you can build your front-end with Svelte as the front-end. (Which is exciting in and of itself … but the really amazing thing is the modular approach!)
+- Write a web app with a front-end interface that utilizes Svelte.js
+- Write a package that can be published as an AppsScripts library, but is also an npm module
+- Write another one with the same architecture, and import the first one into the second one
+
+Basically, it's technology based on Svelte and its underpinning tech to write modules, which you can reuse in other projects, publish them, share.
 
 ## Author & License
 Written by Adam Morris [email](mailto:classroomtechtools.ctt@gmail.com) [homepage](http://classroomtechtools.com/). Released as Open Source, MIT.
 
-## Why?
-What are modules, and why would we want to use them? This essay [On Modules](https://github.com/classroomtechtools/appscripts-modules-ft-svelte/blob/master/on_modules.md) discusses this. But the upshot is because they are self-contained, and you can reuse them.
-
-AppsScripts needs this sort of stuff, really.
-
-Also, you can test it locally!
-
-## What is it?
-This package started out by research into how to incorporate Svelte into an add-on or AppsScripts project. While looking at doing that, I realized that some of the underlying technology Svelte utilizes also could be used to enable modules in AppsScripts.
-
-The technologies included in this starter kit are:
-
-1. [Svelte](https://svelte.dev) for the front-end
-2. [Rollupjs](http://rollupjs.org) to bundle internal modules — either internal ones or npm ones(!) — which become properties on `Import` variable
-3. [Node](https://nodejs.org) for local development and npm module installation
-4. [Ava](https://github.com/avajs/ava) for unit testing
-
 ## Quickstart: Frontend with Svelte (optional)
+
 Get the default app running in your local browser:
 
 ```bash
@@ -40,15 +28,15 @@ npm run dev
 
 Then point your browser to the displayed location. Then you’ll see the default application in your browser.
 
-The entire frontend  lives inside of `./src/project/index.html` locally, and when deployed will be just `index.html` in your project. All of the required JavaScript and CSS is inlined into that file. That way, to deliver the app with AppsScripts, all we need to do is:
+The entire frontend lives inside of `./src/project/index.html` locally, and when deployed will be just `index.html` in your project. All of the required JavaScript and CSS is inlined into that file. That way, to deliver the app with AppsScripts, all we need to do is:
 
 ```js
 const html = HtmlService.createHtmlOutputFromFile('index');
 ```
 
-You can edit the Svelte app from the files located at `./src/svelte`. It’s build in exactly the same way as any normal Svelte app.
+You can edit the Svelte app from the files located at `./src/svelte`. It’s built in exactly the same way as any normal Svelte app.
 
-To see it in action line, deploy it:
+To see it in action on an AppsScripts project, deploy it:
 
 ```bash
 npm run clasp:login
@@ -61,10 +49,13 @@ The `clasp:create` command ensures that clasp uses the `./project` folder as the
 
 > The project provides these `clasp:xyz` commands for convenience, but it is still using `.clasp.json` and `.clasprc.json` as normal.
 
+You don't have to use Svelte, you could just use the modular approach instead.
+
 ## Quickstart: Modules
+
 From above, we see that the developer works inside of one directory, and the build process ensures that all of the frontend application code is bundled up into one file, the `index.html` file. The same sort of pattern applies with writing modules. Whereas with frontend development, the build process is automatic with changes immediately updating in the browser, there are some extra steps to take with modules. (But they’re worth it!)
 
-Anything JavaScript code you write in `./src/modules` is primed to be bundled up into one big file and placed into `./src/project/Bundle.js`.  But you have to be explicit and tell the bundler what variables to export though, and for that we use the `export` statement.
+Any JavaScript code you write in `./src/modules` is primed to be bundled up into one big file and placed into `./src/project/Bundle.js`.  But you have to be explicit and tell the bundler what variables to export though, and for that we use the `export` statement.
 
 ```js
 // ./src/modules/exmaple.js
@@ -78,7 +69,7 @@ When you’ve made a new file, or edited and existing one, kick off the build pr
 npm run bundle
 ```
 
-That will run a few commands which will prepare all of the files into `./src/project/`, ready for production use.
+That will run a few commands which will prepare all of the files into `./src/project/`, ready for production use, which is also deployed with clasp.
 
 From inside the `Bundle.js` file, the exported variables are placed on the `Import` variable as a namespace. You will then be able to access the exported objects, functions, or variables by using the `Import` variable:
 
@@ -99,6 +90,23 @@ function MyFunction () {
     Logger.log(something);
 }
 ```
+
+### Motivation
+
+Why would we want to use this?
+
+- AppsScripts needs this sort of stuff, really: A modularized approach that can be reshared, and reimported to other projects
+
+- You can test it locally!
+
+This package started out by research into how to incorporate Svelte into an add-on or AppsScripts project. While looking at doing that, I realized that some of the underlying technology Svelte utilizes also could be used to enable modules in AppsScripts.
+
+The technologies included in this starter kit are:
+
+1. [Svelte](https://svelte.dev) for the front-end
+2. [Rollupjs](http://rollupjs.org) to bundle internal modules — either internal ones or npm ones(!) — which become properties on `Import` variable
+3. [Node](https://nodejs.org) for local development and npm module installation
+4. [Ava](https://github.com/avajs/ava) for unit testing
 
 ### Directory Structure
 
@@ -197,10 +205,4 @@ Write your tests inside `./tests/`, and execute with `npm run test`. Remember, y
 npm run bundle && npm run test
 ```
 
-Test your bundled code by importing, but use the require syntax and relative path:
 
-```js
-const module = require('../scr/modules/module.js');
-```
-
-Consult Ava for instructions on how to use that framework.
